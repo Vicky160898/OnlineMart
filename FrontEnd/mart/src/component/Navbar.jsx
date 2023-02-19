@@ -13,13 +13,15 @@ import {
   Center,
   Button,
   Avatar,
+  Badge,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { useSelector } from "react-redux";
 export const Navbar = () => {
+  const { cart } = useSelector((state) => state.cart);
   const { colorMode, toggleColorMode } = useColorMode();
-  const navigate = useNavigate();
   return (
     <>
       <Box
@@ -37,7 +39,14 @@ export const Navbar = () => {
             OnLineMart.in
           </Text>
         </Link>
-
+        <Link>
+          Cart
+          {cart.cartitems.length > 0 && (
+            <Badge bg="danger">
+              {cart.cartitems.reduce((a, c) => a + c.quantity, 0)}
+            </Badge>
+          )}
+        </Link>
         <Link to="/login">Login</Link>
         <HStack spacing={{ base: "0", md: "6" }} mr={"40px"}>
           <IconButton

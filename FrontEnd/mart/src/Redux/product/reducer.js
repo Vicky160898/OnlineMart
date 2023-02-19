@@ -1,9 +1,16 @@
-import { PRODUCT_FAILED, PRODUCT_REQUEST, PRODUCT_SUCCESS } from "./actiontype";
+import {
+  PRODUCT_FAILED,
+  PRODUCT_REQUEST,
+  PRODUCT_SINGLE_FAILED,
+  PRODUCT_SINGLE_REQUEST,
+  PRODUCT_SINGLE_SUCCESS,
+  PRODUCT_SUCCESS,
+} from "./actiontype";
 
 const initialState = {
   data: [],
   loading: false,
-  error: false,
+  error: "",
 };
 
 //Product reducer here for getting data according to action..
@@ -13,20 +20,35 @@ export const ReducerProduct = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: true,
-        error: false,
       };
     case PRODUCT_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false,
         data: payload,
       };
     case PRODUCT_FAILED:
       return {
         ...state,
         loading: false,
-        error: true,
+        error: payload,
+      };
+    case PRODUCT_SINGLE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case PRODUCT_SINGLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: payload,
+      };
+    case PRODUCT_SINGLE_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
       };
     default:
       return state;
