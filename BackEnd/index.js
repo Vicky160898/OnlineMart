@@ -1,12 +1,18 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const connect = require("./config/db");
 const cors = require("cors");
+const ProductSchema = require("./routes/product");
 const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(express.json());
 app.use(cors());
-mongoose.connect(process.env.MONGODB_URL)
+app.use(express.urlencoded({ extended: true }));
+mongoose.set("strictQuery", false);
+
+app.use("/", ProductSchema);
+connect();
 app.listen(PORT, () => {
   console.log(`server started at ${PORT}`);
 });
