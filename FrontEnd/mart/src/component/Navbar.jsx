@@ -18,10 +18,17 @@ import {
 import { Link } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Logout } from "../Redux/cart/action";
 export const Navbar = () => {
   const { cart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const handleLogout = () => {
+    dispatch(Logout());
+  };
   return (
     <>
       <Box
@@ -47,7 +54,6 @@ export const Navbar = () => {
             </Badge>
           )}
         </Link>
-        <Link to="/login">Login</Link>
         <HStack spacing={{ base: "0", md: "6" }} mr={"40px"}>
           <IconButton
             size="lg"
@@ -89,13 +95,28 @@ export const Navbar = () => {
                 </Center>
                 <br />
                 <Center>
-                  <p>Username</p>
+                  <p>{user ? <p>{user.name}</p> : "Username"}</p>
                 </Center>
                 <br />
                 <MenuDivider />
-                <MenuItem background="#131921">Your Servers</MenuItem>
+                <MenuItem background="#131921">
+                  {user ? (
+                    <Link to="/order">Order History</Link>
+                  ) : (
+                    "Your Order Details"
+                  )}
+                </MenuItem>
                 <MenuItem background="#131921">Account Settings</MenuItem>
-                <MenuItem background="#131921">Logout</MenuItem>
+                <MenuItem background="#131921">
+                  {user ? (
+                    <Link to="#logout" onClick={handleLogout}>
+                      {" "}
+                      Logout
+                    </Link>
+                  ) : (
+                    <Link to="/signin">Login</Link>
+                  )}
+                </MenuItem>
               </MenuList>
             </Menu>
           </Flex>

@@ -7,9 +7,9 @@ export default function Rating({ rating, numReviews }) {
     <div className="rating">
       <span>
         {rating >= 1 ? (
-          <BsFillStarFill size={"20px"}/>
+          <BsFillStarFill size={"20px"} />
         ) : rating >= 0.5 ? (
-          <FaStarHalfAlt size={"20px"}/>
+          <FaStarHalfAlt size={"20px"} />
         ) : (
           <FiStar size={"20px"} />
         )}
@@ -20,39 +20,39 @@ export default function Rating({ rating, numReviews }) {
         ) : rating >= 1.5 ? (
           <FaStarHalfAlt size={"20px"} />
         ) : (
-          <FiStar size={"20px"}/>
+          <FiStar size={"20px"} />
         )}
       </span>
       <span>
         {rating >= 3 ? (
           <BsFillStarFill size={"20px"} />
         ) : rating >= 2.5 ? (
-          <FaStarHalfAlt size={"20px"}/>
+          <FaStarHalfAlt size={"20px"} />
         ) : (
-          <FiStar size={"20px"}/>
+          <FiStar size={"20px"} />
         )}
       </span>
 
       <span>
         {rating >= 4 ? (
-          <BsFillStarFill size={"20px"}/>
+          <BsFillStarFill size={"20px"} />
         ) : rating >= 3.5 ? (
-          <FaStarHalfAlt size={"20px"}/>
+          <FaStarHalfAlt size={"20px"} />
         ) : (
-          <FiStar size={"20px"}/>
+          <FiStar size={"20px"} />
         )}
       </span>
       <span>
         {rating >= 5 ? (
-          <BsFillStarFill size={"20px"}/>
+          <BsFillStarFill size={"20px"} />
         ) : rating >= 4.5 ? (
-          <FaStarHalfAlt size={"20px"}/>
+          <FaStarHalfAlt size={"20px"} />
         ) : (
-          <FiStar size={"20px"}/>
+          <FiStar size={"20px"} />
         )}
       </span>
       <div>
-        <span>{numReviews}  Reviews</span>
+        <span>{numReviews} Reviews</span>
       </div>
     </div>
   );

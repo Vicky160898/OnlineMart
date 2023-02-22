@@ -9,7 +9,6 @@ import Product from "./Product";
 export default function HomeScreen() {
   const { data, loading, error } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-console.log(data)
   useEffect(() => {
     dispatch(GetProduct());
   }, [dispatch]);
