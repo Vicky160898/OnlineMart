@@ -14,8 +14,9 @@ import {
   Button,
   Avatar,
   Badge,
+  useToast,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
 import { BsCart2 } from "react-icons/bs";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -25,10 +26,12 @@ export const Navbar = () => {
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+  const toast = useToast();
+  const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
 
   const handleLogout = () => {
-    dispatch(Logout());
+    dispatch(Logout(toast, navigate));
   };
   return (
     <>
@@ -110,9 +113,9 @@ export const Navbar = () => {
                 <MenuItem background="#131921">Account Settings</MenuItem>
                 <MenuItem background="#131921">
                   {user ? (
-                    <Link to="#logout" onClick={handleLogout}>
+                    <Text onClick={handleLogout}>
                       Logout
-                    </Link>
+                    </Text>
                   ) : (
                     <Link to="/signin">Login</Link>
                   )}

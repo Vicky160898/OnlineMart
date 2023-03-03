@@ -109,29 +109,30 @@ export const Signin = () => {
               onChange={hanldeChange}
             />
           </FormControl>
-
-          <Button
-            colorScheme="yellow"
-            width="100%"
-            style={{ marginTop: 15 }}
-            onClick={handleSubmit}
-          >
-            {loading === true ? (
-              <Spinner
-                thickness="4px"
-                speed="0.65s"
-                emptyColor="gray.200"
-                color="blue.500"
-                size="md"
-              />
-            ) : (
-              "Sign in"
-            )}
-          </Button>
+          <Link to={`/signun?redirect=${redirect}`}>
+            <Button
+              colorScheme="yellow"
+              width="100%"
+              style={{ marginTop: 15 }}
+              onClick={handleSubmit}
+            >
+              {loading === true ? (
+                <Spinner
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                  color="blue.500"
+                  size="md"
+                />
+              ) : (
+                "Sign in"
+              )}
+            </Button>
+          </Link>
           <Stack pt={6}>
             <Text align={"center"} display="flex" flexDirection={"row"}>
               Don't have an account ?
-              <Link to={`/signun?redirect=${redirect}`}>
+              <Link to="/signup">
                 <Text color={"blue"} fontWeight="bold">
                   Sign up
                 </Text>

@@ -14,9 +14,19 @@ export const ShippingItme = (data) => async (dispatch) => {
   localStorage.setItem("shippingAddress", JSON.stringify(data));
 };
 
-export const Logout = () => async (dispatch) => {
+export const Logout = (toast, navigate) => async (dispatch) => {
   dispatch({ type: LOGOUT_SUCCESS });
   localStorage.removeItem("User");
   localStorage.removeItem("shippingAddress");
-  alert("Logout Successful");
+  localStorage.removeItem("cartItems");
+  toast({
+    title: "Logout Successful!",
+    description: "",
+    status: "success",
+    duration: 5000,
+    isClosable: true,
+    position: "top",
+  });
+  navigate("/signup");
+  return;
 };

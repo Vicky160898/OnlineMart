@@ -10,19 +10,23 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { SignData } from "../Redux/user/action";
 export const Signup = () => {
   const [state, setState] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const toast = useToast();
-
+  const { user, loading } = useSelector((state) => state.userInfo);
+  const { search } = useLocation();
+  const RedirectUrl = new URLSearchParams(search).get("redirect");
+  const redirect = RedirectUrl ? RedirectUrl : "/";
   const hanldeChange = (e) => {
     const { name, value } = e.target;
     setState({
@@ -32,7 +36,6 @@ export const Signup = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     if (!state.email || !state.password || !state.name) {
       toast({
         title: "Please Fill all the Feilds",
@@ -41,49 +44,16 @@ export const Signup = () => {
         isClosable: true,
         position: "bottom",
       });
-      setLoading(false);
-      return;
-    }
-
-    try {
-      let body = {
-        name: state.name,
-        email: state.email,
-        password: state.password,
-      };
-
-      const data = await axios.post(
-        "http://localhost:8080/api/login/signup",
-        body,
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
-      if (data.status) {
-        toast({
-          title: "Registration Successful",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "bottom",
-        });
-        navigate("/login");
-      }
-      setLoading(false);
-    } catch (error) {
-      toast({
-        title: "Error Occured!",
-        description: error.response.data.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setLoading(false);
+    } else {
+      dispatch(SignData(state, toast));
+      navigate(redirect || "/");
     }
   };
+  useEffect(() => {
+    if (user) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, user]);
   return (
     <>
       <Text
@@ -93,7 +63,7 @@ export const Signup = () => {
         textAlign={"center"}
         mt={"20px"}
       >
-       OnLineMart.in
+        OnLineMart.in
       </Text>
       <Box
         textAlign={"center"}
@@ -157,7 +127,7 @@ export const Signup = () => {
           <Stack pt={6}>
             <Text align={"center"} display="flex" flexDirection={"row"}>
               Already have an account ?
-              <Link to="/login">
+              <Link to={`/signin?redirect=${redirect}`}>
                 <Text color={"blue"} fontWeight="bold">
                   Sign in
                 </Text>

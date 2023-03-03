@@ -2,9 +2,11 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import CartScreen from "../pages/CartScreen";
 import HomeScreen from "../pages/HomeScreen";
+import Payment from "../pages/Payment";
 import ProductScreen from "../pages/ProductScreen";
 import ShippingScreen from "../pages/ShippingScreen";
 import { Signin } from "../pages/Signin";
+import { Signup } from "../pages/Signup";
 export default function AllRoutes() {
   return (
     <>
@@ -13,7 +15,9 @@ export default function AllRoutes() {
         <Route path="/" element={<HomeScreen />} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/shipping" element={<ShippingScreen />} />
+        <Route path="/payment" element={<Payment/>} />
       </Routes>
     </>
   );

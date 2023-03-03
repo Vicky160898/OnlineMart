@@ -4,7 +4,6 @@ import {
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGOUT_SUCCESS,
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
@@ -38,13 +37,30 @@ export const LoginData = (data, toast) => async (dispatch) => {
   }
 };
 
-export const SignData = (data) => async (dispatch) => {
+export const SignData = (data, toast) => async (dispatch) => {
   dispatch({ type: SIGNUP_REQUEST });
   try {
-    let res = await axios.post(`http://localhost:8080/api/login/signup`, data);
+    let res = await axios.post(`http://localhost:8080/api/signup`, data);
     dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
+    localStorage.setItem("User", JSON.stringify(res.data));
+    toast({
+      title: "Hurry Up! You Signup Successfully!",
+      description: "",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
     return;
   } catch (e) {
     dispatch({ type: SIGNUP_FAILURE, payload: e.message });
+    toast({
+      title: "Something wrong!",
+      description: e.response.data.message,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
   }
 };
