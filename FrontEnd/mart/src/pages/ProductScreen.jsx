@@ -13,60 +13,62 @@ export default function ProductScreen() {
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
-  const { data, loading, error } = useSelector((state) => state.product);
+  const { single, loading, error } = useSelector((state) => state.product);
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetSingleProduct(id));
   }, [dispatch, id]);
   const AddToCardhandler = async () => {
-    const ExitProduct = cart.cartitems.find((x) => x._id === data._id);
+    const ExitProduct = cart.cartitems.find((x) => x._id === single._id);
     const quantity = ExitProduct ? ExitProduct.quantity + 1 : 1;
-    if (data.countInStock < quantity) {
+    if (single.countInStock < quantity) {
       window.alert("Sorry! product out of stock");
       return;
     }
-    dispatch(CartItme(data, quantity));
+    dispatch(CartItme(single, quantity));
     navigate("/cart");
   };
   return (
     <div>
       {loading ? (
-        <Loading />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Loading />
+        </div>
       ) : error ? (
         <Error error={error} />
       ) : (
         <div className="img">
-          <div>
-            <img src={data.image} alt={data.name} />
+          <div style={{marginTop:'50px' }} >
+            <img src={single.image} alt={single.name} />
           </div>
           <div className="img1">
             <Helmet>
-              <title>{data.name}</title>
+              <title>{single.name}</title>
             </Helmet>
             <HStack ml={30} gap="10px">
               <Text>Name :</Text>
-              <Text fontSize={18}>{data.name}</Text>
+              <Text fontSize={18}>{single.name}</Text>
             </HStack>
-            <Rating rating={data.rating} numReviews={data.numReviews} />
+            <Rating rating={single.rating} numReviews={single.numReviews} />
             <HStack ml={25} gap="35px">
               <Text>Price :</Text>
               <Badge p={1} w={36} fontSize={17}>
-                ${data.price}
+                ${single.price}
               </Badge>
             </HStack>
-            <p>Description: {data.description}</p>
+            <p>Description: {single.description}</p>
           </div>
           <div className="img2">
             <HStack ml={25} gap="38px">
               <Text>Price:</Text>
               <Badge p={1} w={40} fontSize={18}>
-                ${data.price}
+                ${single.price}
               </Badge>
             </HStack>
             <HStack ml={25} gap="25px">
               <Text size={30}>Status :</Text>
-              {data.countInStock > 0 ? (
+              {single.countInStock > 0 ? (
                 <Badge variant="solid" colorScheme="green" p={2} w={40}>
                   In Stock
                 </Badge>

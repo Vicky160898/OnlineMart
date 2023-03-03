@@ -47,32 +47,9 @@ export const Signin = () => {
         position: "bottom",
       });
       return;
-    }
-    try {
-      dispatch(LoginData(state));
+    } else {
+      dispatch(LoginData(state, toast));
       navigate(redirect || "/");
-      return;
-      // } else {
-      //   toast({
-      //     title: "Invalid Credentials! OR Singup First!",
-      //     description: error.response.data.message,
-      //     status: "error",
-      //     duration: 5000,
-      //     isClosable: true,
-      //     position: "top",
-      //   });
-      // }
-
-      //here storing the importance info of User..
-    } catch (error) {
-      toast({
-        title: "Invalid Credentials! OR Singup First!",
-        description: error.response.data.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
     }
   };
 

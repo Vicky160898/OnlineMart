@@ -8,9 +8,9 @@ export default function Product({ el }) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.product);
   const { cart } = useSelector((state) => state.cart);
+  const ExitProduct = cart.cartitems.find((x) => x._id === el._id);
+  const quantity = ExitProduct ? ExitProduct.quantity + 1 : 1;
   const AddTohandler = async (item) => {
-    const ExitProduct = cart.cartitems.find((x) => x._id === el._id);
-    const quantity = ExitProduct ? ExitProduct.quantity + 1 : 1;
     if (el.countInStock < quantity) {
       window.alert("Sorry! product out of stock");
       return;
@@ -32,9 +32,9 @@ export default function Product({ el }) {
           <p>
             <strong>${el.price}</strong>
           </p>
-          {el.countInStock === 0 ? (
-            <Button variant="light" disabled>
-              Out of Stock
+          {el.countInStock < quantity ? (
+            <Button bg="grey" mt={"10px"} disabled>
+              Out Of Stock
             </Button>
           ) : (
             <Button

@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   data: [],
+  single:{},
   loading: false,
   error: "",
 };
@@ -42,7 +43,7 @@ export const ReducerProduct = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        data: payload,
+        single: payload,
       };
     case PRODUCT_SINGLE_FAILED:
       return {
@@ -54,3 +55,4 @@ export const ReducerProduct = (state = initialState, { type, payload }) => {
       return state;
   }
 };
+

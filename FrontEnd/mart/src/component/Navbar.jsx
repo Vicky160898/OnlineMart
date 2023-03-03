@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
+import { BsCart2 } from "react-icons/bs";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../Redux/cart/action";
@@ -33,7 +34,7 @@ export const Navbar = () => {
     <>
       <Box
         w="100%"
-        h="60px"
+        h="75px"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
@@ -47,12 +48,12 @@ export const Navbar = () => {
           </Text>
         </Link>
         <Link>
-          Cart
           {cart.cartitems.length > 0 && (
-            <Badge bg="danger">
+            <Badge bg="red" ml={'15px'}>
               {cart.cartitems.reduce((a, c) => a + c.quantity, 0)}
             </Badge>
           )}
+          <BsCart2 size={"30px"} />
         </Link>
         <HStack spacing={{ base: "0", md: "6" }} mr={"40px"}>
           <IconButton
@@ -110,7 +111,6 @@ export const Navbar = () => {
                 <MenuItem background="#131921">
                   {user ? (
                     <Link to="#logout" onClick={handleLogout}>
-                      {" "}
                       Logout
                     </Link>
                   ) : (

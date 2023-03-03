@@ -8,6 +8,7 @@ import "./home.css";
 import Product from "./Product";
 export default function HomeScreen() {
   const { data, loading, error } = useSelector((state) => state.product);
+  //console.log(data);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetProduct());
@@ -24,7 +25,11 @@ export default function HomeScreen() {
         ) : error ? (
           <Error error={error} />
         ) : (
-          data?.map((el) => <Product el={el} key={el._id} />)
+          data?.map((el) => (
+            <div key={el._id}>
+              <Product el={el} />
+            </div>
+          ))
         )}
       </div>
     </div>

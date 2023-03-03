@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Text, Button } from "@chakra-ui/react";
+import "./home.css";
 import { MdDelete } from "react-icons/md";
 import { CartItme, DeteleItem } from "../Redux/cart/action";
 export default function CartScreen() {
@@ -29,7 +30,7 @@ export default function CartScreen() {
         <title>Shopping Cart</title>
       </Helmet>
       <h1>Shopping Cart</h1>
-      <div>
+      <div className="sub">
         {cart.cartitems.length === 0 ? (
           <Text>
             cart is empty..<Link to="/">Go shopping</Link>
@@ -37,11 +38,12 @@ export default function CartScreen() {
         ) : (
           <div>
             {cart.cartitems.map((el) => (
-              <div key={el._id}>
-                <img src={el.image} alt={el.name} />{" "}
+              <div key={el._id} className="cart">
+                <img src={el.image} alt={el.name} />
                 <Link to={`/product/${el._id}`}>
                   <p>{el.name}</p>
                 </Link>
+                <div className="btn">
                 <Button
                   disabled={el.quantity === 1}
                   onClick={() => updateCartItem(el, el.quantity - 1)}
@@ -55,6 +57,7 @@ export default function CartScreen() {
                 >
                   +
                 </Button>
+                </div>
                 <Button>${el.price}</Button>
                 <MdDelete
                   size={40}
@@ -65,19 +68,19 @@ export default function CartScreen() {
             ))}
           </div>
         )}
-      </div>
-      <div>
-        Subtotal ({cart.cartitems.reduce((a, c) => a + c.quantity, 0)} items):$(
-        {cart.cartitems.reduce((a, c) => a + c.price * c.quantity, 0)})
-      </div>
-      <div>
+      <div className="total">
+        <Text size={'25px'}>OnLine.In</Text>
+        Subtotal ({cart.cartitems.reduce((a, c) => a + c.quantity, 0)} items) : $
+        {cart.cartitems.reduce((a, c) => a + c.price * c.quantity, 0)}
         <Button
           disabled={cart.cartitems.length === 0}
           onClick={checkoutHandler}
+          backgroundColor="#ffc000"
         >
-          process to checkout
+          Buy Now
         </Button>
       </div>
+    </div>
     </div>
   );
 }
