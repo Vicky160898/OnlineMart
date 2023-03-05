@@ -1,5 +1,6 @@
 import {
   PRODUCT_FAILED,
+  PRODUCT_LIKE,
   PRODUCT_REQUEST,
   PRODUCT_SINGLE_FAILED,
   PRODUCT_SINGLE_REQUEST,
@@ -9,7 +10,7 @@ import {
 
 const initialState = {
   data: [],
-  single:{},
+  single: {},
   loading: false,
   error: "",
 };
@@ -51,8 +52,13 @@ export const ReducerProduct = (state = initialState, { type, payload }) => {
         loading: false,
         error: payload,
       };
+    case PRODUCT_LIKE:
+      return {
+        ...state,
+        loading: false,
+        data: payload,
+      };
     default:
       return state;
   }
 };
-

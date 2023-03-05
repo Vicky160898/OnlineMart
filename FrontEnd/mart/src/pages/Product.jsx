@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
 import Rating from "../component/Rating";
 import { useDispatch, useSelector } from "react-redux";
 import { CartItme } from "../Redux/cart/action";
+import { BsFillHeartFill } from "react-icons/bs";
+import { ProductLike } from "../Redux/product/action";
 export default function Product({ el }) {
   const dispatch = useDispatch();
+  const [like, setLike] = useState(false);
   const { data } = useSelector((state) => state.product);
   const { cart } = useSelector((state) => state.cart);
   const ExitProduct = cart.cartitems.find((x) => x._id === el._id);
@@ -17,7 +20,14 @@ export default function Product({ el }) {
     }
     dispatch(CartItme(item, quantity));
   };
-
+  const handleLike = (id) => {
+    setLike(!like);
+    // const updateLike = data.filter((el) =>
+    //   el.id === id ? { ...el, like: !el.like } : el
+    // );
+    console.log(like);
+    dispatch(ProductLike(id, like));
+  };
   return (
     <div>
       <div className="product">
@@ -29,6 +39,20 @@ export default function Product({ el }) {
             <p>{el.name}</p>
           </Link>
           <Rating rating={el.rating} numReviews={el.numReviews} />
+          {/* {like ? (
+            <BsFillHeartFill
+              size={22}
+              bg="red"
+              onClick={() => handleLike(el._id)}
+            />
+          ) : (
+            <BsFillHeartFill
+              size={22}
+              bg="grey"
+              onClick={() => handleLike(el._id)}
+            />
+          )} */}
+
           <p>
             <strong>${el.price}</strong>
           </p>

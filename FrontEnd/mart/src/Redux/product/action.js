@@ -2,6 +2,7 @@ import axios from "axios";
 import utils from "../../utils";
 import {
   PRODUCT_FAILED,
+  PRODUCT_LIKE,
   PRODUCT_REQUEST,
   PRODUCT_SINGLE_FAILED,
   PRODUCT_SINGLE_REQUEST,
@@ -28,4 +29,9 @@ export const GetSingleProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: PRODUCT_SINGLE_FAILED, payload: utils(error) });
   }
+};
+
+export const ProductLike = (id, like) => async (dispatch) => {
+  let res = await axios.patch(`http://localhost:8080/like/${id}`, like);
+  dispatch({ type: PRODUCT_LIKE, payload: res.data });
 };

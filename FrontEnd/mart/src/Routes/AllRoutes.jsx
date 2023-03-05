@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import CartScreen from "../pages/CartScreen";
 import HomeScreen from "../pages/HomeScreen";
+import OrderScreen from "../pages/OrderScreen";
 import Payment from "../pages/Payment";
 import ProductScreen from "../pages/ProductScreen";
 import ShippingScreen from "../pages/ShippingScreen";
@@ -18,6 +19,7 @@ export default function AllRoutes() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/shipping" element={<ShippingScreen />} />
         <Route path="/payment" element={<Payment/>} />
+        <Route path="/order/:id" element={<OrderScreen/>} />
       </Routes>
     </>
   );
