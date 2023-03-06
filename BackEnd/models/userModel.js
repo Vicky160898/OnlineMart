@@ -7,6 +7,7 @@ const UserSchema = new Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, unique: true },
     isAdmin: { type: Boolean, default: false, required: true },
+    order_id: { type: Schema.Types.ObjectId, ref: "order" },
   },
   {
     versionKey: false,

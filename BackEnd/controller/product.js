@@ -27,6 +27,7 @@ const Postproduct = async (req, res) => {
     numReviews,
     rating,
     description,
+    like,
   } = req.body;
   try {
     const data = await Product.findOne({ name: name });
@@ -42,6 +43,7 @@ const Postproduct = async (req, res) => {
         numReviews: numReviews,
         rating: rating,
         description: description,
+        like: like,
       });
       await Newproduct.save();
       return res.status(200).send(Newproduct);
@@ -81,4 +83,26 @@ const CartProduct = async (req, res) => {
   }
 };
 
-module.exports = { Postproduct, GetProduct, GetSingleProduct, CartProduct };
+const ProductLike = async (req, res) => {
+  const { id } = req.params;
+  const { like } = req.body;
+  try {
+    const data = await Product.findOne({ _id: id });
+    if (!data) {
+      return res.status(401).send("Data not found");
+    } else {
+      await Product.updateOne({ _id: id }, { $set: { like: like } });
+      return res.status(201).send(data);
+    }
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+module.exports = {
+  Postproduct,
+  GetProduct,
+  GetSingleProduct,
+  CartProduct,
+  ProductLike,
+};

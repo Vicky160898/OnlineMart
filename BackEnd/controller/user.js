@@ -3,7 +3,6 @@ const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userModel");
 
-
 //creating new user route..
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -45,7 +44,7 @@ const loginUser = async (req, res) => {
           expiresIn: "7 days",
         }
       );
-
+      console.log(token);
       return res.status(201).send({
         message: "login successful",
         token: token,

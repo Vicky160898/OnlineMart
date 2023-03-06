@@ -4,6 +4,7 @@ const {
   GetProduct,
   GetSingleProduct,
   CartProduct,
+  ProductLike,
 } = require("../controller/product");
 const router = express.Router();
 
@@ -12,5 +13,6 @@ router.post("/add", Postproduct);
 router.get("/", GetProduct);
 router.get("/slug/:id", GetSingleProduct);
 router.get("/api/product/:id", CartProduct);
+router.patch("/like/:id", ProductLike);
 
 module.exports = router;

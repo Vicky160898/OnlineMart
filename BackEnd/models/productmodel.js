@@ -13,6 +13,7 @@ const ProductSchema = new Schema(
     numReviews: { type: Number, required: true },
     rating: { type: Number, requred: true },
     description: { type: String, required: true },
+    like: { type: Boolean, default: false },
   },
   {
     versionKey: false,
