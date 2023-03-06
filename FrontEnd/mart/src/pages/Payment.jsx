@@ -1,15 +1,16 @@
 import { Text, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { PlaceOrder } from "../Redux/order/action";
 import Placeholder from "./Placeholder";
 
 export default function Payment() {
   const navigate = useNavigate();
   const toast = useToast();
   const { user } = useSelector((state) => state.userInfo);
-  console.log(user.token);
+  const dispatch = useDispatch();
   const {
     cart: { shippingAddress, cartitems },
     cart,
@@ -32,9 +33,6 @@ export default function Payment() {
         "https://upload.wikimedia.org/wikipedia/commons/5/5a/Zee5-official-logo.jpeg",
       order_id: order.id,
       handler: function (response) {
-        // alert("Your Payment Successful");
-        // alert(response.razorpay_order_id);
-        // alert(response.razorpay_signature);
         let x = {
           shippingAddress: shippingAddress,
           cartitems: cartitems,
@@ -56,8 +54,10 @@ export default function Payment() {
             });
             localStorage.removeItem("cartItems");
             // your orders succeful redirect to home page
-            //console.log(res);
-            navigate(`/order/${res.data._id}`);
+            dispatch(PlaceOrder(res.data._id, user));
+            setTimeout(() => {
+              navigate(`/order/${res.data._id}`);
+            }, 3000);
             return;
           })
           .catch((err) => {

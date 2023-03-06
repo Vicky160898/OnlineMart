@@ -23,7 +23,7 @@ export const Signin = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const { user, loading } = useSelector((state) => state.userInfo);
-  //console.log(user);
+ 
   const hanldeChange = (e) => {
     const { name, value } = e.target;
     setState({

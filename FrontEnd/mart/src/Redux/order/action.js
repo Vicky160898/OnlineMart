@@ -3,18 +3,31 @@ import {
   CREATE_ODER_FAILED,
   CREATE_ODER_REQUEST,
   CREATE_ODER_SUCCESS,
+  ODER_FAILED,
+  ODER_REQUEST,
+  ODER_SUCCESS,
 } from "./actiontype";
 
-export const PlaceOrder = (OrderId, user, toast) => async (dispatch) => {
+export const PlaceOrder = (OrderId, user) => async (dispatch) => {
   dispatch({ type: CREATE_ODER_REQUEST });
   try {
-    let res = await axios.get(`http://localhost:8080/api/orders/${OrderId}`
-    // , {
-    //   headers: { authorization: `Bearer ${user.token}` },
-    // }
-    );
+    let res = await axios.get(`http://localhost:8080/api/orders/${OrderId}`, {
+      headers: { authorization: `Bearer ${user.token}` },
+    });
     dispatch({ type: CREATE_ODER_SUCCESS, payload: res.data });
   } catch (e) {
     dispatch({ type: CREATE_ODER_FAILED, payload: e.message });
+  }
+};
+
+export const History = (user) => async (dispatch) => {
+  dispatch({ type: ODER_REQUEST });
+  try {
+    let res = await axios.get(`http://localhost:8080/api/orders`, {
+      headers: { authorization: `Bearer ${user.token}` },
+    });
+    dispatch({ type: ODER_SUCCESS, payload: res.data });
+  } catch (e) {
+    dispatch({ type: ODER_FAILED, payload: e.message });
   }
 };

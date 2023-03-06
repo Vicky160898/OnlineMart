@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import CartScreen from "../pages/CartScreen";
 import HomeScreen from "../pages/HomeScreen";
+import OrderHistory from "../pages/OrderHistory";
 import OrderScreen from "../pages/OrderScreen";
 import Payment from "../pages/Payment";
 import ProductScreen from "../pages/ProductScreen";
@@ -18,8 +19,9 @@ export default function AllRoutes() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/shipping" element={<ShippingScreen />} />
-        <Route path="/payment" element={<Payment/>} />
-        <Route path="/order/:id" element={<OrderScreen/>} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/order/:id" element={<OrderScreen />} />
+        <Route path="/order" element={<OrderHistory />} />
       </Routes>
     </>
   );
