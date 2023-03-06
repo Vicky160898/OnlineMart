@@ -20,6 +20,7 @@ app.post("/orders", Razorpay.orders);
 app.post("/verify", isAuth, Razorpay.verify);
 app.get("/api/orders/:id", isAuth, Razorpay.GetOrder);
 app.get("/api/orders", isAuth, Razorpay.GetUserOrder);
+app.delete("/api/orders/delete/:id", Razorpay.OrderDelete);
 
 connect();
 app.listen(PORT, () => {
