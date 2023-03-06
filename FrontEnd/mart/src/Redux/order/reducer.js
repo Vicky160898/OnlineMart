@@ -2,6 +2,7 @@ import {
   CREATE_ODER_FAILED,
   CREATE_ODER_REQUEST,
   CREATE_ODER_SUCCESS,
+  DELETE_ODER,
   ODER_FAILED,
   ODER_REQUEST,
   ODER_SUCCESS,
@@ -28,6 +29,12 @@ export const OrderRdeucer = (state = initial, { type, payload }) => {
       return { ...state, loading: false, history: payload, error: "" };
     case ODER_FAILED:
       return { ...state, loading: false, error: payload };
+    case DELETE_ODER:
+      return {
+        ...state,
+        history: state.history.filter((el) => el._id !== payload),
+        loading: false,
+      };
     default:
       return state;
   }
