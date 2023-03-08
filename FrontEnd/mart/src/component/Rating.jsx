@@ -2,7 +2,7 @@ import React from "react";
 import { BsFillStarFill } from "react-icons/bs";
 import { FaStarHalfAlt } from "react-icons/fa";
 import { FiStar } from "react-icons/fi";
-export default function Rating({ rating, numReviews }) {
+export default function Rating({ rating, numReviews, caption }) {
   return (
     <div className="rating">
       <span>
@@ -52,7 +52,11 @@ export default function Rating({ rating, numReviews }) {
         )}
       </span>
       <div>
-        <span>{numReviews} Reviews</span>
+        {caption ? (
+          <span>{caption}</span>
+        ) : (
+          <span>{" " + numReviews + "reviews"}</span>
+        )}
       </div>
     </div>
   );

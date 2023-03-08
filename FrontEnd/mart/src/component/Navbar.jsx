@@ -22,6 +22,7 @@ import { BsCart2 } from "react-icons/bs";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../Redux/cart/action";
+import SearchBox from "./SearchBox";
 export const Navbar = () => {
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.userInfo);
@@ -50,9 +51,10 @@ export const Navbar = () => {
             OnLineMart.in
           </Text>
         </Link>
+        <SearchBox />
         <Link>
           {cart.cartitems.length > 0 && (
-            <Badge bg="red" ml={'15px'}>
+            <Badge bg="red" ml={"15px"}>
               {cart.cartitems.reduce((a, c) => a + c.quantity, 0)}
             </Badge>
           )}
@@ -113,9 +115,7 @@ export const Navbar = () => {
                 <MenuItem background="#131921">Account Settings</MenuItem>
                 <MenuItem background="#131921">
                   {user ? (
-                    <Text onClick={handleLogout}>
-                      Logout
-                    </Text>
+                    <Text onClick={handleLogout}>Logout</Text>
                   ) : (
                     <Link to="/signin">Login</Link>
                   )}
