@@ -7,7 +7,6 @@ export const FetchData =
       let res = await axios.get(
         `http://localhost:8080/search?category=${category}&query=${query}&price=${price}&rating=${rating}&order=${order}&page=${page}`
       );
-      console.log(res.data);
       dispatch({ type: FETCH_SUCCESS, payload: res.data });
     } catch (e) {
       dispatch({ type: FETCH_FAILED, payload: e });

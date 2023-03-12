@@ -6,6 +6,7 @@ import OrderHistory from "../pages/OrderHistory";
 import OrderScreen from "../pages/OrderScreen";
 import Payment from "../pages/Payment";
 import ProductScreen from "../pages/ProductScreen";
+import SearchScreen from "../pages/SearchScreen";
 import ShippingScreen from "../pages/ShippingScreen";
 import { Signin } from "../pages/Signin";
 import { Signup } from "../pages/Signup";
@@ -16,6 +17,7 @@ export default function AllRoutes() {
         <Route path="/product/:id" element={<ProductScreen />} />
         <Route path="/" element={<HomeScreen />} />
         <Route path="/cart" element={<CartScreen />} />
+        <Route path="/search" element={<SearchScreen />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/shipping" element={<ShippingScreen />} />

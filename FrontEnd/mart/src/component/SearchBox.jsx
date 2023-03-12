@@ -7,7 +7,6 @@ export default function SearchBox() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(query)
     navigate(query ? `/search/?query=${query}` : "/search");
   };
 
