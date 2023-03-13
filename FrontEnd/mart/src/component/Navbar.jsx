@@ -23,16 +23,38 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../Redux/cart/action";
 import SearchBox from "./SearchBox";
+import axios from "axios";
+import "../pages/home.css";
+import { useState } from "react";
 export const Navbar = () => {
+  const [files, setFiles] = useState("");
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
-
   const handleLogout = () => {
     dispatch(Logout(toast, navigate));
+  };
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append("image", files);
+    console.log(formData);
+
+    try {
+      const res = await axios.patch(
+        `http://localhost:8080/api/update`,
+        formData,
+        {
+          headers: { authorization: `Bearer ${user.token}` },
+        }
+      );
+      console.log(res.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <>
@@ -98,6 +120,32 @@ export const Navbar = () => {
                     size={"2xl"}
                     src={"https://avatars.dicebear.com/api/male/username.svg"}
                   />
+                </Center>
+                <Center mt={"5px"}>
+                  <p>
+                    {user ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "60%",
+                          margin: "auto",
+                        }}
+                      >
+                        <input
+                          type="file"
+                          multiple
+                          onChange={(e) => setFiles(e.target.files[0])}
+                          className="inputfile"
+                        />
+                        <Button onClick={handleSubmit} w="40%" m={"auto"}>
+                          update
+                        </Button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </p>
                 </Center>
                 <br />
                 <Center>

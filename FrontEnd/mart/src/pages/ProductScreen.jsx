@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import Rating from "../component/Rating";
 import { GetSingleProduct } from "../Redux/product/action";
-import { Badge, Button, Text, HStack } from "@chakra-ui/react";
+import { Badge, Button, Text, HStack, useToast } from "@chakra-ui/react";
 import "./home.css";
 import { Helmet } from "react-helmet-async";
 import Loading from "../component/Loading";
@@ -16,6 +16,7 @@ export default function ProductScreen() {
   const { single, loading, error } = useSelector((state) => state.product);
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const toast = useToast();
   useEffect(() => {
     dispatch(GetSingleProduct(id));
   }, [dispatch, id]);
@@ -23,7 +24,14 @@ export default function ProductScreen() {
     const ExitProduct = cart.cartitems.find((x) => x._id === single._id);
     const quantity = ExitProduct ? ExitProduct.quantity + 1 : 1;
     if (single.countInStock < quantity) {
-      window.alert("Sorry! product out of stock");
+      toast({
+        title: "Sorry! product out of stock",
+        description: "",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
       return;
     }
     dispatch(CartItme(single, quantity));

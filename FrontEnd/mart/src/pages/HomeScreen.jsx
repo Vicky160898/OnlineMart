@@ -8,7 +8,6 @@ import "./home.css";
 import Product from "./Product";
 export default function HomeScreen() {
   const { data, loading, error } = useSelector((state) => state.product);
-  //console.log(data);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetProduct());

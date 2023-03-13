@@ -33,10 +33,18 @@ export const History = (user) => async (dispatch) => {
   }
 };
 
-export const DeleteOrder = (id) => async (dispatch) => {
+export const DeleteOrder = (id, toast) => async (dispatch) => {
   try {
     await axios.delete(`http://localhost:8080/api/orders/delete/${id}`);
     dispatch({ type: DELETE_ODER, payload: id });
+    toast({
+      title: "Order Deleted Successfully!",
+      description: "",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
   } catch (e) {
     console.log(e);
   }

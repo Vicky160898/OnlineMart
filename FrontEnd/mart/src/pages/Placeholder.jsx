@@ -17,11 +17,16 @@ export default function Placeholder({
         Number(((18 * finalValue) / 100).toFixed(2));
   return (
     <div>
-      <div className="list1">
-        <p>Payment</p>
-        <p>Method : Razorpay</p>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <Button bg="red">Preview Order</Button>
       </div>
-      <p>Items</p>
+
       <div>
         {cartitems?.map((el) => (
           <div key={el._id} className="product01">
@@ -38,6 +43,18 @@ export default function Placeholder({
         ))}
       </div>
       <div className="product01">
+        <p>Shipping Details</p>
+        <p>Address :- {shippingAddress.address}</p>
+        <p>City :- {shippingAddress.city}</p>
+        <p>Country :- {shippingAddress.country}</p>
+        <p>Code :- {shippingAddress.code}</p>
+        <Link to={"/shipping"}>
+          <Button bg="#f0c040" color={"white"}>
+            Edit
+          </Button>
+        </Link>
+      </div>
+      <div className="product01">
         <p>Order Summary</p>
         <Button>Amount :- ${finalValue.toFixed(2)}</Button>
         <Button>
@@ -51,18 +68,8 @@ export default function Placeholder({
           Pay Now
         </Button>
       </div>
-      <div className="product01">
-        <p>Shipping Details</p>
-        <p>Address :- {shippingAddress.address}</p>
-        <p>City :- {shippingAddress.city}</p>
-        <p>Country :- {shippingAddress.country}</p>
-        <p>Code :- {shippingAddress.code}</p>
-        <Link to={"/shipping"}>
-          <Button bg="#f0c040" color={"white"}>
-            Edit
-          </Button>
-        </Link>
-      </div>
+      <br />
+      <br />
     </div>
   );
 }

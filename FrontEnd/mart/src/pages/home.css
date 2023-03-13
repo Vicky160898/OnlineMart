@@ -70,23 +70,23 @@
   gap: 60px;
 }
 .cart > img {
-  width:20%;
+  width: 20%;
   height: 20vh;
 }
 .btn {
-  display:flex;
+  display: flex;
   flex-direction: row;
   gap: 10px;
 }
-.sub{
+.sub {
   display: flex;
-  flex-direction: row;
-  margin-left: 20px;
+  justify-content: center;
+
   gap: 160px;
 }
 .total {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
   gap: 30px;
   height: 35vh;
@@ -99,21 +99,16 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width:40%;
+  width: 40%;
   margin: auto;
   text-align: left;
   padding: 20px;
   border: 1px red solid;
 }
-.list1 {
-  display: flex;
-  flex-direction:row;
-  gap: 20px;
-}
 .product01 {
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-between;
   width: 90%;
   margin: auto;
   padding: 20px;
@@ -123,4 +118,15 @@
 .product01 > img {
   width: 100px;
   height: 10vh;
+}
+.product03 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+  gap: "10px";
+  text-align: center;
+  border: 1px solid #404040;
 }

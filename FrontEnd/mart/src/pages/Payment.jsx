@@ -57,7 +57,7 @@ export default function Payment() {
             dispatch(PlaceOrder(res.data._id, user));
             setTimeout(() => {
               navigate(`/order/${res.data._id}`);
-            }, 3000);
+            }, 2000);
             return;
           })
           .catch((err) => {
@@ -84,7 +84,6 @@ export default function Payment() {
 
   return (
     <div>
-      <Text>Preview Order</Text>
       <Placeholder
         shippingAddress={shippingAddress}
         cartitems={cartitems}
