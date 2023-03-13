@@ -5,6 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: "center";
+  margin-top: 40px;
 }
 .product {
   border: 1px solid #404040;

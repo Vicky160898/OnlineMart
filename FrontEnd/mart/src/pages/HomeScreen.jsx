@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
+import AutoSlider from "../component/AutoSlider";
 import Error from "../component/Error";
+import HomeCarousel from "../component/HomeCarousel";
 import Loading from "../component/Loading";
 import { GetProduct } from "../Redux/product/action";
 import "./home.css";
@@ -15,9 +17,9 @@ export default function HomeScreen() {
   return (
     <div className="first">
       <Helmet>
-        <title>OnLineMart.in</title>
+        <title>OnLineMart.in Online Shopping Center</title>
       </Helmet>
-      <h1>Featured Products</h1>
+      <AutoSlider/>
       <div className="products">
         {loading ? (
           <Loading />
@@ -30,6 +32,9 @@ export default function HomeScreen() {
             </div>
           ))
         )}
+      </div>
+      <div>
+        <HomeCarousel />
       </div>
     </div>
   );

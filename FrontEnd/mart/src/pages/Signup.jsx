@@ -57,8 +57,8 @@ export const Signup = () => {
   return (
     <>
       <Text
-        fontSize={40}
-        color="#0A0103"
+        fontSize={30}
+        color="#f0c040"
         fontWeight="bold"
         textAlign={"center"}
         mt={"20px"}
@@ -74,7 +74,7 @@ export const Signup = () => {
         borderRadius="15px"
         boxShadow=" rgba(0, 0, 0, 0.35) 0px 5px 15px"
       >
-        <Text fontSize={"2xl"} color="#0A0103" fontWeight="bold">
+        <Text fontSize={"2xl"} color="#FFFFFF" fontWeight="bold">
           Sign up
         </Text>
         <VStack spacing="5px">
@@ -107,7 +107,7 @@ export const Signup = () => {
           </FormControl>
 
           <Button
-            colorScheme="blue"
+            colorScheme="yellow"
             width="100%"
             style={{ marginTop: 15 }}
             onClick={handleSubmit}
@@ -129,7 +129,7 @@ export const Signup = () => {
               Already have an account ?
               <Link to={`/signin?redirect=${redirect}`}>
                 <Text color={"blue"} fontWeight="bold">
-                  Sign in
+                   Sign in
                 </Text>
               </Link>
             </Text>

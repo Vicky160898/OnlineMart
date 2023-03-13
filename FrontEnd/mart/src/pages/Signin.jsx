@@ -70,7 +70,7 @@ export const Signin = () => {
         Admin Credential email:-admin@gmail.com && Password:-12345
       </Text>
       <Text
-        fontSize={40}
+        fontSize={30}
         color="#f0c040"
         fontWeight="bold"
         textAlign={"center"}
