@@ -3,6 +3,7 @@ const { Schema, model } = require("mongoose");
 // Declare the Schema of the Mongo model
 const UserSchema = new Schema(
   {
+    image: { type: String },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, unique: true },
